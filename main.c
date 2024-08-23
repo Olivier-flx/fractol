@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:38 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/19 18:13:48 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:22:57 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,51 @@
     • The use of the images of the MiniLibX is mandatory.
 */
 
-	int	main(int ac, char **av)
+
+int	main(int ac, char **av)
+{
+	t_fract fract;
+
+	if (ac == 2 && ft_strncmp(av[1], "mandelbrot", 10) == 0)
 	{
-		t_fract fract;
-
-		if (ac == 2 && ft_strncmp(av[1], "mandelbrot", 10) == 0)
-		{
-			fract.title = av[1];
-			initialize_var(&fract);
-			fractol_render(&fract);
-			cmd_mangement(&fract);
-			mlx_loop(fract.mlx_connexion);
-		}
-		else if (ac == 4 && ft_strncmp(av[1], "julia", 5) == 0)
-		{
-			fract.title = "Julia";
-			//run julia fractol
-		}
-		if ((ac == 2 || ac == 3) && ft_strncmp(av[1], "julia", 5) == 0)
-		{
-			//print accepted julia args
-			putstr_fd("ERROR_MESSAGE", STDERR_FILENO);
-		}
-		else
-		{
-			putstr_fd("ERROR_MESSAGE", STDERR_FILENO); // to implement error message
-			//print_params_option();
-			//displays a list of available parameters
-			//and exits properly.
-		}
-		mlx_loop_end(fract.mlx_connexion);
-		return(0);
+		fract.title = av[1];
+		initialize_var(&fract);
+		fractol_render(&fract);
+		cmd_mangement(&fract);
+		mlx_loop(fract.mlx_connexion);
 	}
+	else if (ac == 4 && ft_strncmp(av[1], "julia", 5) == 0)
+		run_julia(ft_atof(av[2]), ft_atof(av[3]), &fract);
+	if ((ac == 2 || ac == 3) && ft_strncmp(av[1], "julia", 5) == 0)
+	{
+		//print accepted julia args
+		putstr_fd("ERROR_MESSAGE", STDERR_FILENO);
+	}
+	else
+	{
+		putstr_fd("ERROR_MESSAGE", STDERR_FILENO); // to implement error message
+		//print_params_option();
+		//displays a list of available parameters
+		//and exits properly.
+	}
+	mlx_loop_end(fract.mlx_connexion);
+	return(0);
+}
 
+
+/////////////TEST double		ft_atof(char *s); ////////////////
+/*
+int	main(int ac, char **av)
+{
+	double test;
+
+	test = 0.0;
+	if (ac == 2)
+		test = ft_atof(av[1]);
+	printf(" test number  =  %f", test);
+	return(0);
+}
+*/
 
 //////TEST AND PRACTICE /////////
 /*

@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:05:09 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/21 17:14:37 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:22:58 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ typedef struct s_fractol
 	double	mouse_y;
 	int		is_dragging;
 
+	// Julia init
+	double	r;
+	double	im;
+
 	int		color;
 	//tests
 	int		colour;
@@ -106,12 +110,17 @@ typedef struct s_fractol
 
 
 void		malloc_error(void);
+int			wrong_params_float();
+
 
 int			ft_strncmp(char *input, char *comp_text, int n);
 void		putstr_fd(char *str, int fd);
+double		ft_atof(char *s);
+
 
 /// Create_run.c
 void		initialize_var(t_fract *fract);
+void		run_julia (double r, double im, t_fract *fract);
 
 /// fract_render.c
 void		fractol_render(t_fract *fract);

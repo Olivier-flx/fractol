@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:49:30 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/21 00:34:21 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:22:32 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_pixel(int x, int y, t_image *img, int color)
 
 //JULIA
 // params = {real , i}
-// z = pixel point + c
+// z = pixel point + const
 // Transform arg to double
 
 //mandelbrot
@@ -67,7 +67,6 @@ void	handle_coordinate(int x, int y, t_fract *fract)
 // so it reverse it and while start at the right top corner of the window
 // ==> c.y = linear_interpol (y, 2, -2, HEIGHT);
 
-
 void	fractol_render(t_fract *fract)
 {
 	int	x;
@@ -85,10 +84,8 @@ void	fractol_render(t_fract *fract)
 			x = img_offset;
 			while (x < WIDTH)
 			{
-
 				handle_coordinate(x, y, fract);
 				x += step;
-
 			}
 			y += 1;
 		}

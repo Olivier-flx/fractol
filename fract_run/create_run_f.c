@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:27:17 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/21 00:24:03 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:17:36 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,28 @@
 
 void	data_init_fractol(t_fract *fract)
 {
-	fract->escape_val = 4;
-	fract->iter_definition = 50;
+	fract->escape_val = 4.0;
+	fract->iter_definition = 30;
 	fract->scale = 1.0;
-	fract->shift_x = 0;
-	fract->shift_y = 0;
+	fract->shift_x = 0.0;
+	fract->shift_y = 0.0;
 	fract->color = 0;
-	fract->mouse_x = 0;
-	fract->mouse_y = 0;
+	fract->mouse_x = 0.0;
+	fract->mouse_y = 0.0;
 	fract->is_dragging = 0;
+	fract->r = 0.0;
+	fract->im = 0.0;
+}
 
+void	run_julia (double r, double im, t_fract *fract)
+{
+	initialize_var(&fract);
+	fract->title = "Julia";
+	fract->r = r;
+	fract->im = im;
+	fractol_render(fract);
+	cmd_mangement(fract);
+	mlx_loop(fract->mlx_connexion);
 }
 
 
