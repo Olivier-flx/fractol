@@ -6,7 +6,7 @@
 #    By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 21:56:26 by ofilloux          #+#    #+#              #
-#    Updated: 2024/08/21 17:13:46 by ofilloux         ###   ########.fr        #
+#    Updated: 2024/08/23 12:14:23 by ofilloux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,12 +63,12 @@ $(MLX_LIB):
 clean:
 	rm -f $(OBJ)
 	$(MAKE) -C $(FT_PRINTF_DIR) clean
-	sudo $(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean : clean
 	rm -f $(NAME)
 	$(MAKE) -C $(FT_PRINTF_DIR) fclean
-	sudo $(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 re: fclean all
 
