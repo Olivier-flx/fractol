@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:45:33 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/19 15:35:20 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 18:55:51 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define RED		0xFF0000
 # define GREEN		0x00FF00
 # define BLUE		0x0000FF
+# define LIGHT_BLUE	0xE5E5FF
+
 # define YELLOW		0xFFFF00
 # define CYAN		0x00FFFF
 # define MAGENTA	0xFF00FF

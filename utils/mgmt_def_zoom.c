@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:18:09 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/21 00:32:42 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:45:24 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	up_scale(t_fract *data, int x, int y)
 	data->shift_y += mouse_pos_y - mouse_pos_y_after;
 	// data->shift_y += (mouse_pos_y - mouse_pos_y_after);
 	//data->shift_y = y - data->scale/ old_zoom_level * (y - data->shift_y );
-	fractol_render(data);
+	fractol_render_root(data);
 }
 */
 
@@ -108,7 +108,7 @@ void up_scale(t_fract *data, int x, int y) {
 //	printf("data scale après: %f \t\t shift_x après : %f \t\t shift_y après: %f\n",data->scale, data->shift_x, data->shift_y);
 
     // Redessiner la fractale avec les nouvelles valeurs
-    fractol_render(data);
+    fractol_render_root(data);
 }
 
 void down_scale(t_fract *data, int x, int y) {
@@ -117,8 +117,8 @@ void down_scale(t_fract *data, int x, int y) {
     double zoom_factor = 1.01;  // ou une autre valeur selon votre besoin
 
     // Calcul de la position de la souris en coordonnées fractales
-    mouse_pos_x = (rev_linear_interpol(x, 0, WIDTH, 2) - WIDTH / 2) / data->scale - data->shift_x;
-    mouse_pos_y = (rev_linear_interpol(y, 0, HEIGHT, 2) - HEIGHT / 2) / data->scale - data->shift_y;
+    mouse_pos_x = (rev_lin_interpol(x, 0, WIDTH, 2) - WIDTH / 2) / data->scale - data->shift_x;
+    mouse_pos_y = (rev_lin_interpol(y, 0, HEIGHT, 2) - HEIGHT / 2) / data->scale - data->shift_y;
 	printf("data scale avant: %f \t mouse_pos_x avant : %f \t mouse_pos_y avant: %f\n",data->scale, mouse_pos_x, mouse_pos_y);
 	printf("shift_x avant: %f \t shift_y avant : %f \n",data->shift_x, data->shift_y);
 
@@ -135,7 +135,7 @@ void down_scale(t_fract *data, int x, int y) {
 	printf("data scale après: %f \t shift_x après : %f \t shift_y après: %f\n",data->scale, data->shift_x, data->shift_y);
 
     // Redessiner la fractale avec les nouvelles valeurs
-    fractol_render(data);
+    fractol_render_root(data);
 }
 
 /*
@@ -183,7 +183,7 @@ void	down_scale(t_fract *data, int x, int y)
 	// 	data->shift_y = y - mouse_pos_y * data->scale;
 	// 	printf("data->shift y = %f \n", data->shift_y);
 	// }
-	fractol_render(data);
+	fractol_render_root(data);
 }
 */
 /*
@@ -197,7 +197,7 @@ void	down_scale(t_fract *data, int x, int y)
 	data->scale *= 1.001;
 	data->shift_x = mouse_pos_x - (x - WIDTH / 2) * data->scale;
 	data->shift_y = mouse_pos_y - (y - HEIGHT / 2) * data->scale;
-	fractol_render(data);
+	fractol_render_root(data);
 }
 */
 
@@ -230,7 +230,7 @@ int	offset_mouse(int x, int y, t_fract *data)
 		moove_counter ++;
 		if (moove_counter >= 20)
 		{
-			fractol_render(data);
+			fractol_render_root(data);
 			moove_counter = 0;
 		}
 	}

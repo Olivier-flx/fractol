@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:38 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 15:22:57 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:52:21 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
     • The use of the images of the MiniLibX is mandatory.
 */
 
-
+///*
 int	main(int ac, char **av)
 {
 	t_fract fract;
@@ -39,12 +39,16 @@ int	main(int ac, char **av)
 	{
 		fract.title = av[1];
 		initialize_var(&fract);
-		fractol_render(&fract);
+		fractol_render_root(&fract);
 		cmd_mangement(&fract);
 		mlx_loop(fract.mlx_connexion);
 	}
 	else if (ac == 4 && ft_strncmp(av[1], "julia", 5) == 0)
 		run_julia(ft_atof(av[2]), ft_atof(av[3]), &fract);
+	else if (ac == 2 && ft_strncmp(av[1], "newton", 6) == 0)
+		run_newton(&fract);
+	// else if (ac == 2 && ft_strncmp(av[1], "newton", 6) == 0)
+	// 	run_newton(ft_atof(av[2]), ft_atof(av[3]), &fract);
 	if ((ac == 2 || ac == 3) && ft_strncmp(av[1], "julia", 5) == 0)
 	{
 		//print accepted julia args
@@ -60,7 +64,7 @@ int	main(int ac, char **av)
 	mlx_loop_end(fract.mlx_connexion);
 	return(0);
 }
-
+// */
 
 /////////////TEST double		ft_atof(char *s); ////////////////
 /*

@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:27:17 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 15:17:36 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:51:36 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	data_init_fractol(t_fract *fract)
 {
+	fract->set = 1;
 	fract->escape_val = 4.0;
 	fract->iter_definition = 30;
 	fract->scale = 1.0;
@@ -23,22 +24,9 @@ void	data_init_fractol(t_fract *fract)
 	fract->mouse_x = 0.0;
 	fract->mouse_y = 0.0;
 	fract->is_dragging = 0;
-	fract->r = 0.0;
-	fract->im = 0.0;
+	fract->c.x = 0.0;
+	fract->c.y = 0.0;
 }
-
-void	run_julia (double r, double im, t_fract *fract)
-{
-	initialize_var(&fract);
-	fract->title = "Julia";
-	fract->r = r;
-	fract->im = im;
-	fractol_render(fract);
-	cmd_mangement(fract);
-	mlx_loop(fract->mlx_connexion);
-}
-
-
 
 void	initialize_var(t_fract *fract)
 {
@@ -64,11 +52,29 @@ void	initialize_var(t_fract *fract)
 	fract->image.addr = mlx_get_data_addr(fract->image.img,
 			&fract->image.bits_per_pixel,
 			&fract->image.line_len, &fract->image.endian);
-
-	//events_loop init
-	//event_listeners_loop(fract); ///TODO
 	data_init_fractol(fract);
-//	fractol_render(fract); --> USED IN MAIN
-//	mlx_loop(fract->mlx_connexion); --> USED IN MAIN
 }
 
+void	run_julia(double r, double im, t_fract *fract)
+{
+	fract->title = "Julia";
+	initialize_var(fract);
+	fract->c.x = r;
+	fract->c.y = im;
+	fract->set = 2;
+	fractol_render_root(fract);
+	cmd_mangement(fract);
+	mlx_loop(fract->mlx_connexion);
+}
+
+void	run_newton(t_fract *fract)
+{
+	fract->title = "Newton";
+	initialize_var(fract);
+	fract->c.x = -1.0;
+	fract->c.y = 0.0;
+	fract->set = 3;
+	fractol_render_root(fract);
+	cmd_mangement(fract);
+	mlx_loop(fract->mlx_connexion);
+}

@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:42:18 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/19 22:45:28 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:30:43 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ int	close_win(t_fract *fract)
 		mlx_destroy_window(fract->mlx_connexion, fract->mlx_window);
 	if ((fract->mlx_connexion) != NULL)
 	{
+		mlx_loop_end(fract->mlx_connexion);
 		mlx_destroy_display(fract->mlx_connexion);
 		free(fract->mlx_connexion);
 	}
-	mlx_loop_end(fract->mlx_connexion);
 	exit(EXIT_SUCCESS);
 }
-
 
 int	handle_keybord_in(int keysym, t_fract *data)
 {
@@ -45,7 +44,7 @@ int	handle_keybord_in(int keysym, t_fract *data)
 	if (keysym == XK_minus || keysym == XK_KP_Subtract)
 		flag = decrease_definition(data);
 	if (flag == 1)
-		fractol_render(data);
+		fractol_render_root(data);
 	return (0);
 }
 

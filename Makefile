@@ -6,7 +6,7 @@
 #    By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 21:56:26 by ofilloux          #+#    #+#              #
-#    Updated: 2024/08/23 12:14:23 by ofilloux         ###   ########.fr        #
+#    Updated: 2024/08/24 00:28:05 by ofilloux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ UTILS = ./utils/handle_errors.c \
 		./utils/cmd.c \
 		./utils/mgmt_def_zoom.c \
 		./utils/math.c \
+		./utils/complex_math.c \
 		./fract_run/create_run_f.c \
-		./fract_run/fract_render.c
+		./fract_run/fract_render.c \
+		./fract_run/calculate_fractols.c
 
 SRC = $(UTILS) \
 	./main.c

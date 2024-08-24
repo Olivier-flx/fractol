@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:49:30 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 15:22:32 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:57:42 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,7 @@ void	put_pixel(int x, int y, t_image *img, int color)
 	*((unsigned int *)(img->addr + offset)) = color;
 }
 
-//JULIA
-// params = {real , i}
-// z = pixel point + const
-// Transform arg to double
-
-//mandelbrot
-//z = z^2 + x
-// z is initially (0,0)
-// c is the actual point
-// We put pixels OUTSIDE mandelbrot set
-void	handle_coordinate(int x, int y, t_fract *fract)
-{
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			colored_px;
-
-	i = 0;
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = (fract->scale * linear_interpol(x, -2, 2, WIDTH)) + fract->shift_x;
-	c.y = (fract->scale * linear_interpol(y, 2, -2, HEIGHT)) + fract->shift_y;
-
-	colored_px = BLACK;
-	//printf("sqr -> c.x = %f \t c.y = %f\n", c.x, c.y);
-	while (i < fract->iter_definition)
-	{
-		//z = z^2 + c --> mandelbrot
-		z = square_z(z);
-		z = sum_z(z, c);
-
-		// the value escaped --> if hypotenuse > 2 => point escaped (c = sqr(a² + b²))
-		if ((z.x * z.x) + (z.y * z.y) > fract->escape_val)
-		{
-			colored_px = linear_interpol(i, GRAY, WHITE, fract->iter_definition);
-			put_pixel(x, y, &fract->image, colored_px);
-			return ;
-		}
-		i++;
-	}
-	put_pixel(x, y, &fract->image, WHITE);
-}
-//c.y = linear_interpol (y, -2, 2, HEIGHT); should normaly reverse -2 and +2
-// so it reverse it and while start at the right top corner of the window
-// ==> c.y = linear_interpol (y, 2, -2, HEIGHT);
-
-void	fractol_render(t_fract *fract)
+void	fractol_render(t_calculate_fract_func calculate_fract, t_fract *fract)
 {
 	int	x;
 	int	y;
@@ -84,7 +38,7 @@ void	fractol_render(t_fract *fract)
 			x = img_offset;
 			while (x < WIDTH)
 			{
-				handle_coordinate(x, y, fract);
+				calculate_fract(x, y, fract);
 				x += step;
 			}
 			y += 1;
@@ -94,4 +48,18 @@ void	fractol_render(t_fract *fract)
 			fract->image.img, 0, 0);
 		img_offset++;
 	}
+}
+
+void	fractol_render_root(t_fract *fract)
+{
+	t_calculate_fract_func calculate_fract;
+
+	calculate_fract = NULL;
+	if (fract->set == 1)
+		calculate_fract = calculate_mandelbrot;
+	else if (fract->set == 2)
+		calculate_fract = calculate_julia;
+	else if (fract->set == 3)
+		calculate_fract = calculate_newton;
+	fractol_render(calculate_fract, fract);
 }

@@ -2,5 +2,6 @@
 *.a
 *.exe
 *.out
+.vscode
 fractol
 inc/minilibx-linux/test/mlx-test
