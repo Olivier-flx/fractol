@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 00:26:25 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/24 01:21:23 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/24 12:56:40 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,20 @@ t_complex	divide_z(t_complex a, t_complex b)
 	return (ret_val);
 }
 
-inline t_complex	sum_z(t_complex z1, t_complex z2)
+t_complex	sum_z(t_complex z1, t_complex z2)
 {
 	t_complex	ret_val;
 
 	ret_val.x = z1.x + z2.x;
 	ret_val.y = z1.y + z2.y;
+	return (ret_val);
+}
+
+t_complex	substracte_z(t_complex z1, t_complex z2)
+{
+	t_complex	ret_val;
+
+	ret_val.x = z1.x - z2.x;
+	ret_val.y = z1.y - z2.y;
 	return (ret_val);
 }

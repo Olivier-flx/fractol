@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:05:09 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/24 00:14:06 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/24 13:24:33 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # ifndef HEIGHT
 #  define HEIGHT 800
 # endif
+
+// precision for newton root approximation
+# define TOLERANCE 0.1
 
 //square used to keep it simple
 
@@ -122,6 +125,7 @@ void		initialize_var(t_fract *fract);
 void		run_julia(double r, double im, t_fract *fract);
 void		run_newton(t_fract *fract);
 
+
 /// fract_render.c
 void		fractol_render_root(t_fract *fract);
 void		put_pixel(int x, int y, t_image *img, int color);
@@ -132,15 +136,21 @@ void		calculate_julia(int x, int y, t_fract *fract);
 void		calculate_newton(int x, int y, t_fract *fract);
 
 //UTILS
+t_complex	create_complex(double x, double y);
+
 /// MATH.c
 double		lin_interpol(double x, double new_min, double new_max,
 				double max);
 double		rev_lin_interpol(double x, double new_min,
 				double new_max, double max);
+
+// Complex math.c
 t_complex	sum_z(t_complex z1, t_complex z2);
 t_complex	square_z(t_complex z);
 t_complex	multiply_z(t_complex a, t_complex b);
 t_complex	divide_z(t_complex a, t_complex b);
+t_complex	substracte_z(t_complex z1, t_complex z2);
+
 
 //cmd.c
 int			close_win(t_fract *fract);

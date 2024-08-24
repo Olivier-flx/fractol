@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:14:22 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/24 00:26:50 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/24 13:24:36 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ double	rev_lin_interpol(double x, double new_min, double new_max, double max)
 	range_new = new_max - new_min;
 	f_x = ((range_new) * (x - old_min) / range_old) + new_min;
 	return (f_x);
+}
+
+t_complex	create_complex(double x, double y)
+{
+	t_complex ret;
+
+	ret.x = x;
+	ret.y = y;
+	return (ret);
 }
 
 double	ft_atof(char *s)
