@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_run_f.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 21:27:17 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 21:51:36 by ofilloux         ###   ########.fr       */
+/*   Created: 2024/08/26 15:42:27 by ofilloux          #+#    #+#             */
+/*   Updated: 2024/08/26 17:14:26 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	data_init_fractol(t_fract *fract)
 	fract->set = 1;
 	fract->escape_val = 4.0;
 	fract->iter_definition = 30;
-	fract->scale = 1.0;
+	fract->scale = 1;
 	fract->shift_x = 0.0;
 	fract->shift_y = 0.0;
 	fract->color = 0;
@@ -53,28 +53,4 @@ void	initialize_var(t_fract *fract)
 			&fract->image.bits_per_pixel,
 			&fract->image.line_len, &fract->image.endian);
 	data_init_fractol(fract);
-}
-
-void	run_julia(double r, double im, t_fract *fract)
-{
-	fract->title = "Julia";
-	initialize_var(fract);
-	fract->c.x = r;
-	fract->c.y = im;
-	fract->set = 2;
-	fractol_render_root(fract);
-	cmd_mangement(fract);
-	mlx_loop(fract->mlx_connexion);
-}
-
-void	run_newton(t_fract *fract)
-{
-	fract->title = "Newton";
-	initialize_var(fract);
-	fract->c.x = -1.0;
-	fract->c.y = 0.0;
-	fract->set = 3;
-	fractol_render_root(fract);
-	cmd_mangement(fract);
-	mlx_loop(fract->mlx_connexion);
 }

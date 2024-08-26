@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:14:22 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/24 13:24:36 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:31:47 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 //								double min, double max)
 //f_x = ((new_max - new_min) * (x - min) / (max - min)) + new_min;
 // min = 0 ; max = width
-double	lin_interpol(double x, double new_min, double new_max, double max)
+double	lin_interpol(double x, double start, double end, double screen_size)
 {
-	double	old_min;
+	double	screen_size_start;
 	double	range_old;
 	double	range_new;
 	double	f_x;
 
-	old_min = 0;
-	range_old = max - old_min;
-	range_new = new_max - new_min;
-	f_x = ((range_new) * (x - old_min) / range_old) + new_min;
+	screen_size_start = 0;
+	range_old = screen_size - screen_size_start;
+	range_new = end - start;
+	f_x = ((range_new) * (x - screen_size_start) / range_old) + start;
 	return (f_x);
 }
 
@@ -47,11 +47,25 @@ double	rev_lin_interpol(double x, double new_min, double new_max, double max)
 
 t_complex	create_complex(double x, double y)
 {
-	t_complex ret;
+	t_complex	ret;
 
 	ret.x = x;
 	ret.y = y;
 	return (ret);
+}
+
+static inline int	ft_atof_space_sign(int *i, char *s, int *sign)
+{
+	*sign = 1;
+	while (s[*i] == ' ' || s[*i] == '\t')
+		(*i)++;
+	while (s[*i] == '-' || s[*i] == '+')
+	{
+		if (s[*i] == '-')
+			*sign *= -1;
+		(*i)++;
+	}
+	return (*sign);
 }
 
 double	ft_atof(char *s)
@@ -63,16 +77,8 @@ double	ft_atof(char *s)
 
 	i = 0;
 	tmp = 1;
-	sign = 1;
 	n = 0;
-	while (s[i] == ' ' || s[i] == '\t')
-		i++;
-	while (s[i] == '-' || s[i] == '+')
-	{
-		if (s[i] == '-')
-			sign *= -1;
-		i++;
-	}
+	sign = ft_atof_space_sign(&i, s, &sign);
 	if (s[i] < '0' || s[i] > '9')
 		return ((double) wrong_params_float());
 	while (s[i] >= '0' && s[i] <= '9')

@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 00:26:25 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/24 12:56:40 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:27:09 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_complex	divide_z(t_complex a, t_complex b)
 	double		conjugate_denom;
 
 	conjugate_denom = b.x * b.x + b.y * b.y;
-	ret_val.x = (a.x * b.x + a.y * b.y) / conjugate_denom;
-	ret_val.y = (a.x * b.y - a.y * b.x) / conjugate_denom;
+	ret_val.x = ((a.x * b.x) + (a.y * b.y)) / conjugate_denom;
+	ret_val.y = ((a.y * b.x) - (a.x * b.y)) / conjugate_denom;
 	return (ret_val);
 }
 

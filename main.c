@@ -6,7 +6,7 @@
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:55:38 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 21:52:21 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/26 23:32:14 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,22 @@ int	main(int ac, char **av)
 	t_fract fract;
 
 	if (ac == 2 && ft_strncmp(av[1], "mandelbrot", 10) == 0)
-	{
-		fract.title = av[1];
-		initialize_var(&fract);
-		fractol_render_root(&fract);
-		cmd_mangement(&fract);
-		mlx_loop(fract.mlx_connexion);
-	}
+		run_mandelbrot(&fract);
 	else if (ac == 4 && ft_strncmp(av[1], "julia", 5) == 0)
 		run_julia(ft_atof(av[2]), ft_atof(av[3]), &fract);
+	else if (ac == 2 && ft_strncmp(av[1], "burning", 7) == 0)
+		run_burning_ship(&fract);
+	else if (ac == 2 && ft_strncmp(av[1], "mandelbar", 9) == 0)
+		run_mandelbar(&fract);
 	else if (ac == 2 && ft_strncmp(av[1], "newton", 6) == 0)
 		run_newton(&fract);
-	// else if (ac == 2 && ft_strncmp(av[1], "newton", 6) == 0)
-	// 	run_newton(ft_atof(av[2]), ft_atof(av[3]), &fract);
 	if ((ac == 2 || ac == 3) && ft_strncmp(av[1], "julia", 5) == 0)
 	{
-		//print accepted julia args
-		putstr_fd("ERROR_MESSAGE", STDERR_FILENO);
+		putstr_fd(ERROR_MSG_JULIA, STDERR_FILENO);
+		putstr_fd(ERROR_MSG_JULIA_2, STDERR_FILENO);
 	}
 	else
-	{
-		putstr_fd("ERROR_MESSAGE", STDERR_FILENO); // to implement error message
-		//print_params_option();
-		//displays a list of available parameters
-		//and exits properly.
-	}
-	mlx_loop_end(fract.mlx_connexion);
+		putstr_fd(ERROR_MSG, STDERR_FILENO);
 	return(0);
 }
 // */
@@ -130,7 +120,7 @@ void	color_screen(t_fract *data, int color)
 
 int	color_text(t_fract *data)
 {
-	mlx_string_put(data->mlx_connexion, data->mlx_window, 150, 150, data->colour, "Color Changing Window!");
+	mlx_string_put(data->mlx_connexion, data->mlx_window, 150, 150, data->color, "Color Changing Window!");
 	return (0);
 }
 
@@ -143,17 +133,17 @@ int	change_color(int keysym, t_fract *data)
 	if (keysym == XK_r)		// If it's red
 	{
 		color_screen(data, 0xff0000);
-		data->colour = 0x00FF00;		// Change to green
+		data->color = 0x00FF00;		// Change to green
 	}
 	else if (keysym == XK_g)	// If it's green
 	{
 		color_screen(data, 0xff00);
-		data->colour = 0x0000FF;		// Change to blue
+		data->color = 0x0000FF;		// Change to blue
 	}
 	else if (keysym == XK_b)
 	{
 		color_screen(data, 0xff);
-		data->colour = 0xff0000;		// Change to blue
+		data->color = 0xff0000;		// Change to blue
 	}
 	else if (keysym == XK_Escape)
 

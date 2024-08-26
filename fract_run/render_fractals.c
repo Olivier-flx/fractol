@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_render.c                                     :+:      :+:    :+:   */
+/*   render_fracals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofilloux <ofilloux@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 22:49:30 by ofilloux          #+#    #+#             */
-/*   Updated: 2024/08/23 21:57:42 by ofilloux         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:29:17 by ofilloux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fractol_render(t_calculate_fract_func calculate_fract, t_fract *fract)
 
 void	fractol_render_root(t_fract *fract)
 {
-	t_calculate_fract_func calculate_fract;
+	t_calculate_fract_func	calculate_fract;
 
 	calculate_fract = NULL;
 	if (fract->set == 1)
@@ -60,6 +60,10 @@ void	fractol_render_root(t_fract *fract)
 	else if (fract->set == 2)
 		calculate_fract = calculate_julia;
 	else if (fract->set == 3)
+		calculate_fract = calculate_burning_ship;
+	else if (fract->set == 4)
+		calculate_fract = calculate_mandelbar;
+	else if (fract->set == 5)
 		calculate_fract = calculate_newton;
 	fractol_render(calculate_fract, fract);
 }
